@@ -1,24 +1,23 @@
 import mongoose from "mongoose";
 
 // Load the server
-import db from '../modules/db'
+import db from "../modules/db";
 // Load the Product Model
-import User from '../modules/User'
+import User from "../modules/User";
 
 // Handle request
 exports.handler = async (event, context) => {
   context.callbackWaitsForEmptyEventLoop = false;
+  console.log(event.queryStringParameters);
 
-  let filter = null
-
+  let filter = null;
   try {
-
-    const data = JSON.parse(event.body);
+    const data = event.queryStringParameters;
     console.log(data);
-    
-    // find used based on id or name
-    if (data.id) filter = {"_id": data.id}
-    if (data.name) filter = {"name": data.name}
+
+    // find usedr based on id or name
+    if (data.id) filter = { _id: data.id };
+    if (data.name) filter = { name: data.name };
 
     // Use user.Model to find all users
     const user = await User.findOne(filter),

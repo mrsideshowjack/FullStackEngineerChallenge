@@ -30,13 +30,13 @@
 
     <v-content>
       <v-container class="fill-height" fluid>
-        <v-row align="center" justify="center">
+        <v-col align="stretch" justify="stretch">
           <transition>
             <keep-alive>
               <router-view></router-view>
             </keep-alive>
           </transition>
-        </v-row>
+        </v-col>
       </v-container>
     </v-content>
 
