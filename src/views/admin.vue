@@ -10,30 +10,30 @@
     </li>
 
     <div v-for="user in users" :key="user._id">
-      <p>{{user}}</p>
+      <p>{{ user }}</p>
     </div>
   </div>
 </template>
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
-  name:'admin',
+  name: "admin",
   data() {
     return {
       error: false,
       users: []
-    }
+    };
   },
-  mounted () {
+  mounted() {
     axios
-      .get('http://localhost:8085/listUser', { crossdomain: true })
+      .get("http://localhost:8085/listUser", { crossdomain: true })
       .then(response => {
-        this.users = response.data.data
+        this.users = response.data.data;
       })
       .catch(error => {
-        console.log(error)
-        this.errored = true
-      })
+        console.log(error);
+        this.errored = true;
+      });
   }
-}
+};
 </script>
