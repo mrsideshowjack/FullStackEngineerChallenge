@@ -8,16 +8,14 @@ import User from "../modules/User";
 // Handle request
 exports.handler = async (event, context) => {
   context.callbackWaitsForEmptyEventLoop = false;
-  console.log(event.queryStringParameters);
 
   let filter = null;
   try {
-    const data = event.queryStringParameters;
-    console.log(data);
-
     // find usedr based on id or name
-    if (data.id) filter = { _id: data.id };
-    if (data.name) filter = { name: data.name };
+    if (event.queryStringParameters.id)
+      filter = { _id: event.queryStringParameters.id };
+    if (event.queryStringParameters.name)
+      filter = { name: event.queryStringParameters.name };
 
     // Use user.Model to find all users
     const user = await User.findOne(filter),

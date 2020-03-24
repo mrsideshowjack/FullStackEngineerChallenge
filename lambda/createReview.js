@@ -13,9 +13,9 @@ exports.handler = async (event, context) => {
   try {
     // Parse the ID
     const data = JSON.parse(event.body),
-      id = data.id,
-      authorId = data.authorId,
-      reviewBody = data.reviewBody,
+      id = data.data.id,
+      authorId = data.data.authorId,
+      reviewBody = data.data.reviewBody,
       review = {
         _id: mongoose.Types.ObjectId(),
         authorId: authorId,
@@ -25,7 +25,7 @@ exports.handler = async (event, context) => {
         msg: "User successfully updated",
         data: review
       };
-    console.log(data);
+    console.log(review);
 
     // Use User.Model and id to update
     await User.findOneAndUpdate({ _id: id }, { $push: { reviews: review } });

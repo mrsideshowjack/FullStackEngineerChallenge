@@ -1,15 +1,15 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import employee from "../views/employee.vue";
+// import employee from "../views/employee.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: "/",
-    name: "employee",
-    component: employee
-  },
+  // {
+  //   path: "/",
+  //   name: "employee",
+  //   component: employee
+  // },
   {
     path: "/admin",
     name: "admin",
@@ -19,6 +19,13 @@ const routes = [
   },
   {
     path: "/employee",
+    name: "employee",
+    component: function() {
+      return import(/* webpackChunkName: "employee" */ "../views/employee.vue");
+    }
+  },
+  {
+    path: "/employee/:id",
     name: "employee",
     component: function() {
       return import(/* webpackChunkName: "employee" */ "../views/employee.vue");

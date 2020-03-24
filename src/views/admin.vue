@@ -15,13 +15,18 @@
       <h2>{{ user.name }}</h2>
       <p>Reviews: {{ user.reviews.length }}</p>
 
+      <assignReview :userId="user._id" @updateUsers="getUsers" />
       <deleteUser :userId="user._id" @updateUsers="getUsers" />
       <editUser :userId="user._id" @updateUsers="getUsers" />
+      <p>
+        Assigned Reviews Todo:
+        <template v-for="user in user.reviewsTodo">{{ user }} </template>
+      </p>
       <v-expansion-panels>
         <v-expansion-panel v-for="review in user.reviews" :key="review._id">
           <v-expansion-panel-header
-            >review from
-            {{ getUserNameById(review.authorId) }}</v-expansion-panel-header
+            >{{ user.name }}'s review of
+            {{ review.authorId }}</v-expansion-panel-header
           >
           <v-expansion-panel-content>
             <p>{{ review.body }}</p>
@@ -36,6 +41,7 @@
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>
+      <v-spacer></v-spacer>
     </div>
   </div>
 </template>
@@ -44,12 +50,14 @@ import axios from "axios";
 import createUser from "../components/createUser";
 import editUser from "../components/editUser";
 import deleteUser from "../components/deleteUser";
+import assignReview from "../components/assignReview";
 export default {
   name: "admin",
   components: {
     createUser,
     editUser,
-    deleteUser
+    deleteUser,
+    assignReview
   },
   data() {
     return {
@@ -72,14 +80,6 @@ export default {
           console.log(error);
           this.error = true;
         });
-    },
-    getUserNameById(id) {
-      if (!id) return "no author id found";
-      let name = this.users.find(usr => {
-        return usr._id === id;
-      });
-      if (name) return name.name;
-      return "User does not exsist";
     },
     deleteReview(userId, reviewId) {
       console.log(userId, reviewId);
