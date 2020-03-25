@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 // Load the Product Model
 import User from "../modules/User";
-
+// load db connection
+import db from "../modules/db";
 // Handle request
 exports.handler = async (event, context) => {
   context.callbackWaitsForEmptyEventLoop = false;
@@ -13,7 +14,6 @@ exports.handler = async (event, context) => {
       response = {
         msg: "Review successfully deleted"
       };
-    console.log(data);
 
     await User.updateOne(
       { _id: id },

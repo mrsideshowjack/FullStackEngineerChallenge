@@ -2,6 +2,14 @@
   <v-app id="inspire">
     <v-navigation-drawer v-model="drawer" app clipped>
       <v-list shaped dense>
+        <v-list-item to="/" link>
+          <v-list-item-action>
+            <v-icon>mdi-home</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Home</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
         <v-list-item to="/employee" link>
           <v-list-item-action>
             <v-icon>mdi-account</v-icon>

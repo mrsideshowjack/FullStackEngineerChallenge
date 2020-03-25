@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
-
-// Load the server
+// load db connection
 import db from "../modules/db";
 // Load the Product Model
 import User from "../modules/User";
@@ -25,9 +24,6 @@ exports.handler = async (event, context) => {
         msg: "User successfully created",
         data: user
       };
-    console.log(name);
-
-    console.log(user);
 
     // Use user.Model to create a new user
     await User.create(user);

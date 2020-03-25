@@ -1,9 +1,8 @@
 import mongoose from "mongoose";
-
-// Load the server
-import db from '../modules/db'
 // Load the Product Model
-import User from '../modules/User'
+import User from "../modules/User";
+// load db connection
+import db from "../modules/db";
 
 // Handle request
 exports.handler = async (event, context) => {

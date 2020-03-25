@@ -47,7 +47,7 @@ export default {
     deleteUser() {
       this.deleteBtnIsLoading = true;
       axios
-        .delete("http://localhost:8888/deleteUser", {
+        .delete(`${process.env.VUE_APP_API_URI}deleteUser`, {
           data: this.userId
         })
         .then(response => {

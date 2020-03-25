@@ -1,13 +1,6 @@
 <template>
   <div class="admin">
-    <h1>This is an admin page</h1>
-
-    Needs to:
-    <li>Add/remove/update/view employees</li>
-    <li>Add/update/view performance reviews</li>
-    <li>
-      Assign employees to participate in another employee's performance review
-    </li>
+    <h1>Admin</h1>
 
     <createUser @updateUsers="getUsers" />
 
@@ -68,11 +61,12 @@ export default {
   },
   mounted() {
     this.getUsers();
+    console.log(process.env.VUE_APP_API_URI);
   },
   methods: {
     getUsers() {
       axios
-        .get("http://localhost:8888/listUser")
+        .get(`http://localhost:8888/listUser`)
         .then(response => {
           this.users = response.data.data;
         })
@@ -85,7 +79,7 @@ export default {
       console.log(userId, reviewId);
       this.deleteReviewBtnIsLoading = true;
       axios
-        .delete("http://localhost:8888/deleteReview", {
+        .delete(`${process.env.VUE_APP_API_URI}deleteReview`, {
           data: {
             id: userId,
             reviewId: reviewId

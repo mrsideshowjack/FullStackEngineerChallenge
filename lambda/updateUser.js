@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
-
-// Load the server
+// load db connection
 import db from "../modules/db";
 // Load the Product Model
 import User from "../modules/User";

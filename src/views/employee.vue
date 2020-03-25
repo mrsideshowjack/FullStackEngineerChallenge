@@ -1,13 +1,5 @@
 <template>
   <div class="employee">
-    <v-select
-      :items="users.map(usr => usr.name)"
-      @change="setEmployee"
-      label="Outlined style"
-      hint="Select employee"
-      persistent-hint
-      outlined
-    ></v-select>
     <template v-if="employee">
       <h1>Hello {{ employee.name }}</h1>
 
@@ -15,7 +7,7 @@
       <p v-if="employee.reviewsTodo.length <= 0">
         <b>Seems like you don't have any reviews to do. Good job 👍</b>
       </p>
-      <v-list v-else subheader>
+      <v-list v-else subheader class="mx-auto" max-width="700">
         <v-subheader>Employees</v-subheader>
 
         <v-list-item v-for="user in employee.reviewsTodo" :key="user">
@@ -50,6 +42,7 @@
         </v-card>
       </template>
     </template>
+    <h1 v-else>Could not find employee {{ employee }}</h1>
   </div>
 </template>
 <script>
@@ -70,10 +63,17 @@ export default {
     this.getEmployee();
     this.getUsers();
   },
+  watch: {
+    $route() {
+      this.getEmployee();
+    }
+  },
   methods: {
     getEmployee() {
       axios
-        .get(`http://localhost:8888/readUser?id=${this.$route.params.id}`)
+        .get(
+          `${process.env.VUE_APP_API_URI}readUser?name=${this.$route.params.id}`
+        )
         .then(response => {
           this.employee = response.data.data;
         })
@@ -84,7 +84,7 @@ export default {
     },
     getUsers() {
       axios
-        .get("http://localhost:8888/listUser")
+        .get(`${process.env.VUE_APP_API_URI}listUser`)
         .then(response => {
           this.users = response.data.data;
         })
@@ -92,9 +92,6 @@ export default {
           console.log(error);
           this.error = true;
         });
-    },
-    setEmployee(employee) {
-      this.$router.push({ name: "employee", params: { employee } });
     }
   }
 };
