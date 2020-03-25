@@ -61,12 +61,11 @@ export default {
   },
   mounted() {
     this.getUsers();
-    console.log(process.env.VUE_APP_API_URI);
   },
   methods: {
     getUsers() {
       axios
-        .get(`http://localhost:8888/listUser`)
+        .get(`${process.env.VUE_APP_API_URI}listUser`)
         .then(response => {
           this.users = response.data.data;
         })
