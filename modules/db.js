@@ -7,8 +7,6 @@ const dbUrl = process.env.MONGODB_URI,
     useFindAndModify: false
   };
 
-console.log(dbUrl);
-
 mongoose.set("debug", true);
 // Set DB from mongoose connection
 mongoose.connect(dbUrl, dbOptions);
