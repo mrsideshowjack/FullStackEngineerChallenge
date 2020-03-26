@@ -65,7 +65,10 @@ export default {
   methods: {
     getUsers() {
       axios
-        .get(`${process.env.VUE_APP_API_URI}listUser`)
+        .get(
+          `${process.env.VUE_APP_API_URI ||
+            "https://trusting-stonebraker-df23c9.netlify.com/.netlify/functions/"}listUser`
+        )
         .then(response => {
           this.users = response.data.data;
         })
@@ -78,12 +81,16 @@ export default {
       console.log(userId, reviewId);
       this.deleteReviewBtnIsLoading = true;
       axios
-        .delete(`${process.env.VUE_APP_API_URI}deleteReview`, {
-          data: {
-            id: userId,
-            reviewId: reviewId
+        .delete(
+          `${process.env.VUE_APP_API_URI ||
+            "https://trusting-stonebraker-df23c9.netlify.com/.netlify/functions/"}deleteReview`,
+          {
+            data: {
+              id: userId,
+              reviewId: reviewId
+            }
           }
-        })
+        )
         .then(response => {
           console.log("user deleted", response);
           this.deleteReviewBtnIsLoading = false;

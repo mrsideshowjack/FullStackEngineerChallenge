@@ -55,11 +55,15 @@ export default {
     createUser() {
       this.saveBtnIsLoading = true;
       axios
-        .post(`${process.env.VUE_APP_API_URI}createUser`, {
-          data: {
-            name: this.userName
+        .post(
+          `${process.env.VUE_APP_API_URI ||
+            "https://trusting-stonebraker-df23c9.netlify.com/.netlify/functions/"}createUser`,
+          {
+            data: {
+              name: this.userName
+            }
           }
-        })
+        )
         .then(response => {
           console.log(response);
           this.saveBtnIsLoading = false;

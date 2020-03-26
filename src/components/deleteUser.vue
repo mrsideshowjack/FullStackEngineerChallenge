@@ -47,9 +47,13 @@ export default {
     deleteUser() {
       this.deleteBtnIsLoading = true;
       axios
-        .delete(`${process.env.VUE_APP_API_URI}deleteUser`, {
-          data: this.userId
-        })
+        .delete(
+          `${process.env.VUE_APP_API_URI ||
+            "https://trusting-stonebraker-df23c9.netlify.com/.netlify/functions/"}deleteUser`,
+          {
+            data: this.userId
+          }
+        )
         .then(response => {
           console.log(response);
           this.deleteBtnIsLoading = false;

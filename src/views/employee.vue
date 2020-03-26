@@ -72,7 +72,10 @@ export default {
     getEmployee() {
       axios
         .get(
-          `${process.env.VUE_APP_API_URI}readUser?name=${this.$route.params.id}`
+          `${process.env.VUE_APP_API_URI ||
+            "https://trusting-stonebraker-df23c9.netlify.com/.netlify/functions/"}readUser?name=${
+            this.$route.params.id
+          }`
         )
         .then(response => {
           this.employee = response.data.data;
@@ -84,7 +87,10 @@ export default {
     },
     getUsers() {
       axios
-        .get(`${process.env.VUE_APP_API_URI}listUser`)
+        .get(
+          `${process.env.VUE_APP_API_URI ||
+            "https://trusting-stonebraker-df23c9.netlify.com/.netlify/functions/"}listUser`
+        )
         .then(response => {
           this.users = response.data.data;
         })

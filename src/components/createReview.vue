@@ -57,14 +57,18 @@ export default {
     editUser() {
       this.saveBtnIsLoading = true;
       axios
-        .put(`${process.env.VUE_APP_API_URI}updateUser`, {
-          data: {
-            id: this.userId,
-            user: {
-              reviewsTodo: this.selectedUsers
+        .put(
+          `${process.env.VUE_APP_API_URI ||
+            "https://trusting-stonebraker-df23c9.netlify.com/.netlify/functions/"}updateUser`,
+          {
+            data: {
+              id: this.userId,
+              user: {
+                reviewsTodo: this.selectedUsers
+              }
             }
           }
-        })
+        )
         .then(response => {
           console.log(response);
           this.saveBtnIsLoading = false;
@@ -82,13 +86,17 @@ export default {
     addReview() {
       this.saveBtnIsLoading = true;
       axios
-        .post(`${process.env.VUE_APP_API_URI}createReview`, {
-          data: {
-            user: this.user,
-            authorId: this.reviewer,
-            reviewBody: this.reviewBody
+        .post(
+          `${process.env.VUE_APP_API_URI ||
+            "https://trusting-stonebraker-df23c9.netlify.com/.netlify/functions/"}createReview`,
+          {
+            data: {
+              user: this.user,
+              authorId: this.reviewer,
+              reviewBody: this.reviewBody
+            }
           }
-        })
+        )
         .then(response => {
           console.log(response);
           this.saveBtnIsLoading = false;
