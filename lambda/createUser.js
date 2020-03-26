@@ -29,6 +29,10 @@ exports.handler = async (event, context) => {
     await User.create(user);
     return {
       statusCode: 201,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify(response)
     };
   } catch (err) {
